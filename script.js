@@ -1,3 +1,5 @@
+const startButton = document.getElementById('start');
+
 let timer;
 let date = new Date();
 date.setHours(0);
@@ -11,12 +13,33 @@ let s = date.getSeconds();
 function start() {
 
     timer = setInterval(showTimer, 1000);
+    startButton.onclick = '';
 
 };
 
 function stop() {
 
-    clearInterval(timer);
+    clearInterval(timer);    
+    startButton.onclick = () => start();
+
+};
+
+function reset() {
+
+    date.setHours(0);
+    date.setMinutes(0);
+    date.setSeconds(0);
+    
+    s = returnHours(date.getSeconds());
+    m = returnHours(date.getMinutes());
+    h = returnHours(date.getHours());
+
+    let zero = h +':'+ m +':'+ s;
+
+    document.querySelector('#timer').innerHTML = zero;
+
+    stop();
+    start();
 
 };
 
@@ -50,4 +73,4 @@ function showTimer() {
 
 function returnHours(hours) {
     return (hours < 10)? '0' + hours : hours;
-};
+}; 
